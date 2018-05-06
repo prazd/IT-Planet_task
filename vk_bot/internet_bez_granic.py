@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+#Для корректной работы нужно создать файлы формата txt, фигурирующие в коде и поместить в один каталог с программой
 import vk
 import vk_api
 import time
@@ -19,7 +19,6 @@ def Involid():
                         w = open("invalidy.txt","a")
                         w.write(str(item['user_id'])+' ')
                         w.close()
-                        #write_msg(item['user_id'],"Ваша заявка принята, чтобы получить помощь напишите !task")
                         break
 
 def Pr_Inv(uid):
@@ -59,15 +58,7 @@ def Opoveshenie(ll):
          t[i] = y.sub('',t[i])
     print(t)
     return t
-#while True:
-           #response = vk.method('messages.get', values)
-           #if response['items']:
-                    #values['last_message_id'] = response['items'][0]['id']
-                    #for i in range(len(t)):
-                    #         write_msg(t[i],'В вашем районе нужна помощь инвалиду!')
-                    #return None
-#q = Opoveshenie('Юго-Западная')
-#print(q)
+
 
 def Proverka(inv):
       write_msg(297399806,'Вам поступила заявка, проверьте сообщество')  
@@ -131,7 +122,7 @@ def Volonter():
                     write_msg(item['user_id'],'Спасибо за то, что делаете мир лучше!\nНадеюсь Вы понимаете, насколько важна Ваша помощь и надеемся, на Вашу ответственность в этом деле')
                     break
 
-vk = vk_api.VkApi(token='77777dfb2b3caa9942cf9a2da42e168f33d2c925206f40bc7586584ab743454f152952eee5c56546b9321')
+vk = vk_api.VkApi(token='Здесь должен быть API ключ сообщества ВК')
 values = {'out':0,'count':100,'time_offset':60}
 def write_msg(user_id, s):
     vk.method('messages.send',{'user_id':user_id,'message':s})
