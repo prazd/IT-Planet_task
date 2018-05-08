@@ -1,4 +1,3 @@
-#!/home/prazd/anaconda3/bin/python3.6
 #Нужна бд mysql, где есть 2 databases - inv и vol
 #в inv 1 таблица id(id INT)
 #в vol таблица info(id INT, name TEXT, place TEXT, mob TEXT, teleg TEXT)
