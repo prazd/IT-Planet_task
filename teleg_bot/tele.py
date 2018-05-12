@@ -24,7 +24,7 @@ def task(message):
             chspis += [g]
     if message.chat.id in chspis:
         bot.send_message(message.chat.id, '''Вы волонтер и
-        не можете пользоваться /task''')
+                                          не можете пользоваться /task''')
     else:
         cursor.execute('select place from info')
         che = cursor.fetchall()
@@ -84,8 +84,7 @@ def gorod(call):
                               text='''Вот, кто
                               Вам может помочь:\n''' + q)
         for i in range(len(rassyl)):
-            bot.send_message(rassyl[i][0], '''Инвалид
-             в Вашем районе нуждается в помощи''')
+            bot.send_message(rassyl[i][0], 'Нужна помощь в Вашем районе')
 
 
 @bot.message_handler(commands=["start"])
@@ -114,16 +113,16 @@ def mes(message):
     c = mysql_check()
     if c == 1:
         bot.send_message(message.chat.id, '''Вы уже зарегестрированы как инвалид,
-         отправьте /task для получения помощи''')
+                                             /task''')
     elif c == 2:
-        bot.send_message(message.chat.id, '''Вы зарегистрированы как волонтер,
-         ждите пока к Вам не обратятся за помощью''')
+        bot.send_message(message.chat.id, 'Вам нужно ждать уведомления')
     else:
         markup = telebot.types.ReplyKeyboardMarkup()
         markup.row('Хочу зарегистрироваться как волонтер',
                    'Хочу зарегистрироваться как инвалид')
-        send = bot.send_message(message.chat.id, '''Здравствуйте!\nВыберите
-        один из предложенных вариантов''', reply_markup=markup)
+        send = bot.send_message(message.chat.id,
+                                '''Здравствуйте!\nВыберите '''
+                                '''один из предложенных вариантов''', reply_markup=markup)
         bot.register_next_step_handler(send, variant)
 
 
@@ -160,7 +159,7 @@ def resh(message):
         connect.commit()
         connect.close()
         bot.send_message(int(t[-1]), '''Вы зарегестрированы, как инвалид.
-         Чтобы начать работу нажмите /task''')
+                                        /task''')
 
 
 def reg_vo(message):
@@ -180,8 +179,7 @@ def reg_vo(message):
         connect.close()
         bot.send_message(message.chat.id, 'Вы делаете мир лучше!')
     except IndexError:
-        bot.send_message(message.chat.id, '''Данные
-        указаны в неправильном формате!''')
+        bot.send_message(message.chat.id, 'Формат неверный')
 
 
 @bot.message_handler(content_types='[text]')
@@ -190,8 +188,8 @@ def otvet(message):
     w = telebot.types.InlineKeyboardButton(text='''Можете также
      попробовать нашего бота вк''', url='https://vk.com/club163425064')
     keyboard.add(w)
-    bot.send_message(message.chat.id, '''Чтобы начать
-     работу с ботом отправьте /start''', reply_markup=keyboard)
+    bot.send_message(message.chat.id, '''Чтобы начать работу с ботом отправьте
+                                      /start''', reply_markup=keyboard)
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
