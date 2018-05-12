@@ -131,7 +131,6 @@ while True:
     if response['items']:
         values['last_message_id'] = response['items'][0]['id']
         for item in response['items']: 
-             # if и elif не забыть убрать потом!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
              if response['items'][0]['body'] == '!task': 
                  Pomosh() 
              elif Pr_Inv(item['user_id']) == 1:
