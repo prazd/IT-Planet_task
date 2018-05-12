@@ -122,7 +122,8 @@ def mes(message):
                    'Хочу зарегистрироваться как инвалид')
         send = bot.send_message(message.chat.id,
                                 '''Здравствуйте!\nВыберите '''
-                                '''один из предложенных вариантов''', reply_markup=markup)
+                                '''один из предложенных вариантов''',
+                                reply_markup=markup)
         bot.register_next_step_handler(send, variant)
 
 
@@ -190,6 +191,7 @@ def otvet(message):
     keyboard.add(w)
     bot.send_message(message.chat.id, '''Чтобы начать работу с ботом отправьте
                                       /start''', reply_markup=keyboard)
+
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
