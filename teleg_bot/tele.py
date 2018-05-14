@@ -110,11 +110,11 @@ def mes(message):
                     return 2
         connect.close()
         conn.close()
-    c = mysql_check()
-    if c == 1:
+    check_mysql = mysql_check()
+    if check_mysql == 1:
         bot.send_message(message.chat.id, '''Вы уже зарегестрированы как инвалид,
                                              /task''')
-    elif c == 2:
+    elif check_mysql == 2:
         bot.send_message(message.chat.id, 'Вам нужно ждать уведомления')
     else:
         markup = telebot.types.ReplyKeyboardMarkup()
@@ -128,8 +128,8 @@ def mes(message):
 
 
 def variant(message):
-    w = ['Хочу зарегистрироваться как волонтер']
-    if message.text != w[0]:
+    volonter = ['Хочу зарегистрироваться как волонтер']
+    if message.text != volonter[0]:
         mark = telebot.types.ReplyKeyboardMarkup()
         mark.row('/task')
         connect = MySQLdb.connect('БД inv')
@@ -152,7 +152,6 @@ def resh(message):
     if message.text == "OK":
         with open('id.txt', 'r') as dob_inv:
             t = dob_inv.read().split('\n')
-        print(t)
         subprocess.call('echo "" > id.txt', shell=True)
         connect = MySQLdb.connect('БД inv')
         cursor = connect.cursor()
@@ -165,17 +164,16 @@ def resh(message):
 
 def reg_vo(message):
     a = message.text.split('\n')
-    e = []
-    e += a
-    e += [message.from_user.username]
-    print(e)
+    e_list = []
+    e_list += a
+    e_list += [message.from_user.username]
     connect = MySQLdb.connect('БД vol')
     connect.set_character_set('utf8')
     cursor = connect.cursor()
     try:
         cursor.execute('''insert into info(id, place, name, mob,
         teleg) values({},\'{}\',\'{}\',\'{}\',\'@{}\')'''.format(
-         str(message.chat.id), e[0], e[1], e[2], '@' + e[3]))
+         str(message.chat.id), e_list[0], e_list[1], e_list[2], e_list[3]))
         connect.commit()
         connect.close()
         bot.send_message(message.chat.id, 'Вы делаете мир лучше!')
